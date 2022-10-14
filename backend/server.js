@@ -1,13 +1,5 @@
 const http = require('http');
 const app = require('./app');
-const mongoose = require('mongoose');
-const dotenv = require('dotenv');
-dotenv.config();
-
-// connect to database
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log('Connected to MongoDB'))
-    .catch(error => console.log(error));
 
 // returns a valid port wether it is a number or a string
 const normalizePort = val => {
