@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -5,6 +6,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const userRoutes = require('./routes/user');
+const sauceRoutes = require('./routes/sauce');
 
 // connect to database
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -23,6 +25,10 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 
 app.use('/api/auth', userRoutes);
+app.use('/api/sauces', sauceRoutes);
+app.use('/images', express.static(path.join(__dirname, 'images')));
+
+
 
 // export app
 module.exports = app;
