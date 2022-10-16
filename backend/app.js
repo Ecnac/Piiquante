@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 dotenv.config();
 
+// import the routes
 const userRoutes = require('./routes/user');
 const sauceRoutes = require('./routes/sauce');
 
@@ -13,6 +14,7 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
     .then(() => console.log('Connected to MongoDB'))
     .catch(error => console.log(error));
 
+// create express app
 const app = express();
 
 app.use((req, res, next) => {
@@ -24,11 +26,10 @@ app.use((req, res, next) => {
 
 app.use(bodyParser.json());
 
+// routes
 app.use('/api/auth', userRoutes);
 app.use('/api/sauces', sauceRoutes);
 app.use('/images', express.static(path.join(__dirname, 'images')));
-
-
 
 // export app
 module.exports = app;
